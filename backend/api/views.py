@@ -12,7 +12,11 @@ class AudioListView(APIView):
     def get(self, request):
         audio_files = AudioFile.objects.all()
         data = [
-            {"title": audio.title, "url": request.build_absolute_uri(audio.file.url)}
+            {
+                "title": audio.title,
+                "audio_url": request.build_absolute_uri(audio.file.url),
+                "image_url": request.build_absolute_uri(audio.image.url) if audio.image else None,
+            }
             for audio in audio_files
         ]
         return Response(data)

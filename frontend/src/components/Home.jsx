@@ -18,23 +18,37 @@ const Home = () => {
     });
   }, []);
 
-  return (
-    <div>
-      <h1>Home</h1>
-      <p>{message}</p>
-      <ul>
-        {audioFiles.map((audio, index) => (
-            <li key={index}>
-                <p>{audio.title}</p>
-                <audio controls>
-                    <source src={audio.url} type="audio/mpeg" />
-                </audio>
+  const handleAudioPlayPause = (audioElement) => {
+    if (audioElement.paused) {
+        audioElement.play();
+    } else {
+        audioElement.pause();
+    }
+};
 
-            </li>
-        ))}
-      </ul>
+return (
+    <div>
+        <h1>Home</h1>
+        <p>{message}</p>
+        <ul>
+            {audioFiles.map((audio, index) => (
+                <li key={index}>
+                    <p>{audio.title}</p>
+                    <img
+                        src={audio.image_url}
+                        alt={audio.title}
+                        style={{ cursor: "pointer", width: "100px" }}
+                        onClick={() => {
+                            const audioElement = document.getElementById(`audio-${index}`);
+                            handleAudioPlayPause(audioElement);
+                        }}
+                    />
+                    <audio id={`audio-${index}`} src={audio.audio_url} />
+                </li>
+            ))}
+        </ul>
     </div>
-  )
+);
 
 }
 
