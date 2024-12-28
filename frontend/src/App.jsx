@@ -2,12 +2,31 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Home from './components/Home'
+import About from './components/About'
+import Contact from './components/Contact'
+
+
 
 function App() {
   return (
     <Router>
+      <nav className='navbar'>
+        <ul className='navbar-nav'>
+          <li className='nav-item'>
+            <a href='/'>Home</a>
+          </li>
+          <li className='nav-item'>
+            <a href='/about'>About</a>
+          </li>
+          <li className='nav-item'>
+            <a href='/contact'>Contact</a>
+          </li>
+        </ul>
+      </nav>
       <Routes>
         <Route path='/' element={<Home />}></Route>
+        <Route path='/about' element={<About />}></Route>
+        <Route path='/contact' element={<Contact />}></Route>
       </Routes>
     </Router>
   )
