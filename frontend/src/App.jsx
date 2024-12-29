@@ -24,11 +24,13 @@ function App() {
           </li>
         </ul>
       </nav>
+      <div>
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/about' element={<About />}></Route>
         <Route path='/contact' element={<Contact />}></Route>
       </Routes>
+      </div>
     </Router>
   )
 }
