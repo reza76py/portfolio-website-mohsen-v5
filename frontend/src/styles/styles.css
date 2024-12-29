@@ -110,3 +110,62 @@ html, body {
   opacity: 1; /* Makes the overlay visible */
   transform: translateY(0); /* Slides up the overlay */
 }
+
+
+/* Responsive styles */
+
+/* 240x480 */
+@media (max-width: 240px) {
+  .navbar {
+    padding: 5px 10px;
+    background-color: blue;
+  }
+  .image-container {
+    width: 100px;
+    height: 150px;
+  }
+}
+
+/* 625x768 */
+@media (min-width: 241px) and (max-width: 625px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: green;
+  }
+  .image-container {
+    width: 200px;
+    height: 250px;
+  }
+}
+
+/* 896x1024 */
+@media (min-width: 626px) and (max-width: 897px) {
+  .navbar {
+    background-color: yellow;
+  }
+  .image-container {
+    width: 250px;
+    height: 300px;
+  }
+}
+
+/* 1232x900 */
+@media (min-width: 699px) and (max-width: 1232px) {
+  .navbar {
+    background-color: red;
+    padding: 10px;
+  }
+  .image-container {
+    width: 280px;
+    height: 350px;
+  }
+}
+
+/* 1920x1080 */
+@media (min-width: 1233px) and (max-width: 1920px) {
+  .image-container {
+    width: 300px;
+    height: 400px;
+  }
+}
