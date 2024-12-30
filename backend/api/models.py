@@ -38,3 +38,14 @@ class AudioFile(models.Model):
 
         # Save the model again to store the resized image
         super().save(*args, **kwargs)
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    subject = models.CharField(max_length=255, blank=True, null=True)
+    message = models.TextField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.subject or 'No Subject'}"        

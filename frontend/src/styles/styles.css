@@ -234,6 +234,122 @@ html, body, #root {
   transform: translateY(0);
 }
 
+/* ######################################################################## */
+
+
+/* About page base styling */
+.about-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: rgb(202, 187, 187); /* Matches dropdown menu background */
+  border-radius: 10px;
+  margin: 20px auto;
+  max-width: 900px; /* Limits the width for larger screens */
+  color: black;
+  font-family: 'Allura', cursive;
+}
+
+/* Title styling */
+.about-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: rgb(49, 50, 54); /* Matches body-area background */
+}
+
+/* Paragraph styling */
+.about-container p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  text-align: center;
+  margin: 10px 0;
+}
+
+
+/* ######################################################################## */
+
+
+
+.contact-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-container h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: 'Allura', cursive;
+}
+
+.contact-container p {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.status-message {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.status-message.success {
+  color: green;
+}
+
+.status-message.error {
+  color: red;
+
+
+/* ######################################################################## */
+
+
+
+
+
+
 /* Responsive styles */
 
 /* 240x480 */
@@ -259,12 +375,32 @@ html, body, #root {
 
   .hamburger-menu:hover {
     transform
-
+  
 
   .image-container {
     max-width: 100%; /* Use the full width for small screens */
     height: auto;
   }
+
+  .about-container {
+    padding: 10px;
+    margin: 0; /* Remove margin to fit the full screen width */
+    width: 100%; /* Use the entire width of the screen */
+    border-radius: 0; /* Remove border radius to avoid clipping */
+  }
+
+  /* Text adjustments */
+  .about-container h1 {
+    font-size: 1.2rem; /* Smaller title font size */
+    line-height: 1.5; /* Adjust line height for better spacing */
+  }
+
+  .about-container p {
+    font-size: 0.8rem; /* Reduce paragraph font size */
+    line-height: 1.4; /* Compact line height */
+  }
+
+
 }
 
 /* 241x625 */
@@ -296,7 +432,20 @@ html, body, #root {
     max-width: 50%; /* Take full width */
     height: auto;
   }
+  }
 
+  .about-container {
+    padding: 15px;
+    font-size: 1rem; /* Slightly larger font */
+  }
+  .about-container h1 {
+    font-size: 1.8rem;
+  }
+  .about-container p {
+    font-size: 1rem;
+  }
+  
+}  
 
 /* 626x897 */
 @media (min-width: 626px) and (max-width: 897px) {
@@ -306,6 +455,17 @@ html, body, #root {
   .image-container {
     max-width: 250px;
     height: auto;
+  }
+
+  .about-container {
+    padding: 20px;
+    font-size: 1.1rem;
+  }
+  .about-container h1 {
+    font-size: 2rem;
+  }
+  .about-container p {
+    font-size: 1.1rem;
   }
 }
 
@@ -319,6 +479,17 @@ html, body, #root {
     max-width: 280px;
     height: auto;
   }
+
+  .about-container {
+    padding: 30px;
+    font-size: 1.2rem;
+  }
+  .about-container h1 {
+    font-size: 2.2rem;
+  }
+  .about-container p {
+    font-size: 1.2rem;
+  }
 }
 
 /* 1233px and above */
@@ -327,4 +498,15 @@ html, body, #root {
     max-width: 300px;
     height: auto;
   }
-}}}
+
+  .about-container {
+    padding: 40px;
+    font-size: 1.3rem;
+  }
+  .about-container h1 {
+    font-size: 2.5rem;
+  }
+  .about-container p {
+    font-size: 1.3rem;
+  }
+}}
