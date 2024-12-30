@@ -1,24 +1,26 @@
-/* Reset default styles for html, body, and root */
+/* Reset default styles */
 html, body, #root {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  background-color: black; /* Consistent background color */
 }
 
-/* Ensure #root takes the full viewport */
 #root {
   display: flex;
   flex-direction: column;
-  background-color: rgb(107, 98, 98); /* Optional: Match your desired background */
+  background-color: rgb(107, 98, 98);
 }
 
-/* Ensuring the body and html cover the full viewport */
-html, body {
-  width: 100%;
-  height: 100%;
-  background-color: black; /* Set the background color for consistency */
+.logo {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 20px;
+  
 }
 
 /* Navbar styling */
@@ -27,29 +29,34 @@ html, body {
   top: 0;
   left: 0;
   z-index: 1000;
-  background-color: rgb(202, 187, 187);
   width: 100%;
   padding: 10px 20px;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  display: flex;
-  margin: 0; /* Ensures no additional spacing from margins */
-
+  background-color: rgb(148, 123, 123);
 }
 
-/* Body area starts below the navbar */
+/* Body content starts below navbar */
 .body-area {
-  margin-top: 100px; /* Adjust to the height of your navbar */
+  margin-top: 100px; /* Matches navbar height */
   padding: 20px;
   background-color: rgb(153, 158, 207);
   border: 1px solid black;
+
 }
 
 /* Navbar navigation styles */
 .navbar-nav {
   display: flex;
   list-style: none;
+  justify-content: center; /* Centers the links horizontally */
+  align-items: center; /* Aligns the links vertically */
+  width: 100%; /* Ensures it takes the full width of the navbar */
+  padding: 0; /* Removes extra padding */
+  margin: 0; /* Removes extra margin */
 }
+
 
 .nav-item {
   color: brown;
@@ -57,25 +64,89 @@ html, body {
   text-decoration: none;
 }
 
+.nav-item a {
+  color: white; /* Change to your desired color */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease-in-out; /* Add a smooth transition for hover effect */
+  
+}
+
+.nav-item a:hover {
+  color: yellow; /* Change to your desired hover color */
+}
+
+
+
+/* Hamburger menu for small screens */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+}
+
+
+.hamburger-menu div {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  margin: 3px 0;
+}
+
+
+/* Dropdown menu for small screens */
+.dropdown-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  background-color: rgb(202, 187, 187);
+  padding: 10px 0;
+}
+
+
+.dropdown-menu.active {
+  display: flex;
+}
+
+.dropdown-menu a {
+  text-decoration: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.dropdown-menu a:hover {
+  background-color: rgb(153, 158, 207);
+}
+
+
 /* Image container styling */
 .image-container {
   position: relative;
-  width: 300px; /* Adjust width to your preference */
-  height: 400px; /* Adjust height to your preference */
+  width: 100%; /* Adjust for responsive behavior */
+  max-width: 300px;
+  height: auto;
+  aspect-ratio: 3/4; /* Maintain aspect ratio */
   overflow: hidden;
-  cursor: pointer; /* Makes the image clickable */
-  margin: 10px; /* Adds spacing between images */
-  border-radius: 10px; /* Adds rounded corners */
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 10px;
 }
 
-/* Image list for alignment */
 .image-list {
-  display: flex; /* Enables images to sit next to each other */
-  flex-wrap: wrap; /* Allows wrapping to the next line if they don't fit */
-  justify-content: space-around; /* Adjusts spacing between images */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center-align images on smaller screens */
   padding: 0;
   margin: 0;
-  list-style-type: none; /* Removes bullet points */
+  list-style: none; /* Simplified declaration */
+  gap: 10px; /* Add spacing between columns */
 }
 
 /* Image behavior */
@@ -83,12 +154,12 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%); /* Makes the image black-and-white */
-  transition: filter 0.3s ease-in-out; /* Smooth transition */
+  filter: grayscale(100%);
+  transition: filter 0.3s ease-in-out;
 }
 
 .image-container:hover img {
-  filter: grayscale(0%); /* Restores the color on hover */
+  filter: grayscale(0%);
 }
 
 /* Overlay styling */
@@ -97,75 +168,111 @@ html, body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  background: rgba(0, 0, 0, 0.7);
   color: white;
   padding: 10px;
   text-align: center;
-  opacity: 0; /* Hidden by default */
+  opacity: 0;
   transform: translateY(100%);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth animation */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .image-container:hover .overlay {
-  opacity: 1; /* Makes the overlay visible */
-  transform: translateY(0); /* Slides up the overlay */
+  opacity: 1;
+  transform: translateY(0);
 }
-
 
 /* Responsive styles */
 
 /* 240x480 */
 @media (max-width: 240px) {
-  .navbar {
-    padding: 5px 10px;
-    background-color: blue;
+  /* Hide regular navbar links */
+  .navbar-nav {
+    display: none; /* Hide the regular navbar links */
   }
-  .image-container {
-    width: 100px;
-    height: 150px;
-  }
-}
 
-/* 625x768 */
-@media (min-width: 241px) and (max-width: 625px) {
-  .navbar {
+  /* Hamburger menu */
+  .hamburger-menu {
+    display: flex; /* Show the hamburger menu */
     flex-direction: column;
-    align-items: flex-start;
-    background-color: green;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    background-color: rgb(202, 187, 187); /* Matches navbar background */
+    border-radius: 5px; /* Rounded corners for better appearance */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: transform 0.2s ease-in-out; /* Smooth animation on click */
   }
+
+  .hamburger-menu:hover {
+    transform
+
+
   .image-container {
-    width: 200px;
-    height: 250px;
+    max-width: 100%; /* Use the full width for small screens */
+    height: auto;
   }
 }
 
-/* 896x1024 */
+/* 241x625 */
+@media (min-width: 241px) and (max-width: 625px) {
+  /* Hide regular navbar links */
+  .navbar-nav {
+    display: none; /* Hide the regular navbar links */
+  }
+
+  /* Hamburger menu */
+  .hamburger-menu {
+    display: flex; /* Show the hamburger menu */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    background-color: rgb(202, 187, 187); /* Matches navbar background */
+    border-radius: 5px; /* Rounded corners for better appearance */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: transform 0.2s ease-in-out; /* Smooth animation on click */
+  }
+
+  .hamburger-menu:hover {
+    transform
+
+
+  .image-container {
+    max-width: 50%; /* Take full width */
+    height: auto;
+  }
+}
+
+/* 626x897 */
 @media (min-width: 626px) and (max-width: 897px) {
   .navbar {
     background-color: yellow;
   }
   .image-container {
-    width: 250px;
-    height: 300px;
+    max-width: 250px;
+    height: auto;
   }
 }
 
-/* 1232x900 */
-@media (min-width: 699px) and (max-width: 1232px) {
+/* 898x1232 */
+@media (min-width: 898px) and (max-width: 1232px) {
   .navbar {
     background-color: red;
     padding: 10px;
   }
   .image-container {
-    width: 280px;
-    height: 350px;
+    max-width: 280px;
+    height: auto;
   }
 }
 
-/* 1920x1080 */
-@media (min-width: 1233px) and (max-width: 1920px) {
+/* 1233px and above */
+@media (min-width: 1233px) {
   .image-container {
-    width: 300px;
-    height: 400px;
+    max-width: 300px;
+    height: auto;
   }
-}
+}}}
