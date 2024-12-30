@@ -4,6 +4,8 @@ import axios from "axios";
 const Home = () => {
   const [message, setMessage] = useState("");
   const [audioFiles, setAudioFiles] = useState([]);
+  const [playingIndex, setPlayingIndex] = useState(null); // New state for playing index
+
   const audioRefs = useRef([]);
 
   useEffect(() => {
@@ -17,32 +19,64 @@ const Home = () => {
     });
   }, []);
 
+  // const handleAudioPlayPause = (index) => {
+  //   const currentAudio = audioRefs.current[index];
+  //   if (currentAudio) {
+  //     if (currentAudio.paused) {
+  //       currentAudio.play();
+  //       setPlayingIndex(index); // Set the playing index
+  //     } else {
+  //       currentAudio.pause();
+  //       setPlayingIndex(null); // Reset the playing index
+  //     }
+  //   }
+  // };
+  
+
   const handleAudioPlayPause = (index) => {
-    const currentAudio = audioRefs.current[index];
-    if (currentAudio) {
-      if (currentAudio.paused) {
-        currentAudio.play();
+    // Pause any currently playing audio
+    if (playingIndex !== null && playingIndex !== index) {
+      const currentPlayingAudio = audioRefs.current[playingIndex];
+      if (currentPlayingAudio) {
+        currentPlayingAudio.pause();
+        currentPlayingAudio.currentTime = 0; // Reset to the start
+      }
+    }
+  
+    // Handle play/pause for the clicked audio
+    const clickedAudio = audioRefs.current[index];
+    if (clickedAudio) {
+      if (clickedAudio.paused) {
+        clickedAudio.play();
+        setPlayingIndex(index); // Set the new playing index
       } else {
-        currentAudio.pause();
+        clickedAudio.pause();
+        setPlayingIndex(null); // Reset the playing index
       }
     }
   };
+  
+
+
+
 
   return (
     <div>
       
-      <p>{message}</p>
+      <p className="home-message">{message}</p>
       <ul className="image-list">
         {audioFiles.map((audio, index) => (
           <li key={index}>
             <div
-              className="image-container"
+              className={"image-container ${playingIndex === index ? 'playing' : ''}"}
               onClick={() => handleAudioPlayPause(index)}
             >
               <img src={audio.image_url} alt={audio.title} />
-              <div className="overlay">
+              <div className={`overlay ${playingIndex === index ? "active" : ""}`}>
                 <h3>{audio.title}</h3>
-                <p>{audio.description}</p>
+                <div className="description-container">
+                  <p>{audio.description}</p>
+                </div>
               </div>
             </div>
             {/* Hidden audio element */}

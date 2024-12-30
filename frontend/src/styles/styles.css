@@ -34,15 +34,25 @@ html, body, #root {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(148, 123, 123);
+  background-color: rgb(124, 121, 134);
 }
 
 /* Body content starts below navbar */
 .body-area {
   margin-top: 100px; /* Matches navbar height */
   padding: 20px;
-  background-color: rgb(153, 158, 207);
+  background-color: rgb(49, 50, 54);
   border: 1px solid black;
+  
+}
+
+
+.home-message {
+  color: rgb(221, 125, 125);
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 20px 0;
+  font-family: 'Allura', cursive;
 
 }
 
@@ -74,6 +84,35 @@ html, body, #root {
 .nav-item a:hover {
   color: yellow; /* Change to your desired hover color */
 }
+
+
+.description-container {
+  max-height: 150px; /* Limit the height of the description */
+  overflow-y: auto; /* Enable vertical scrolling */
+  background-color: rgba(0, 0, 0, 0.7); /* Ensure background matches overlay */
+  color: white; /* Text color */
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.9rem; /* Adjust font size for readability */
+  scrollbar-width: thin; /* Thin scrollbar for modern browsers */
+  scrollbar-color: gray transparent; /* Custom scrollbar colors */
+}
+
+/* Optional: Enhance scrollbar appearance for WebKit browsers */
+.description-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.description-container::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 3px;
+}
+
+.description-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
 
 
 
@@ -131,13 +170,15 @@ html, body, #root {
   position: relative;
   width: 100%; /* Adjust for responsive behavior */
   max-width: 300px;
-  height: auto;
+  height: 300px;
   aspect-ratio: 3/4; /* Maintain aspect ratio */
   overflow: hidden;
   cursor: pointer;
   margin: 10px;
   border-radius: 10px;
 }
+
+
 
 .image-list {
   display: flex;
@@ -162,6 +203,11 @@ html, body, #root {
   filter: grayscale(0%);
 }
 
+.image-container.playing {
+  filter: grayscale(0%); /* Remove grayscale when playing */
+}
+
+
 /* Overlay styling */
 .overlay {
   position: absolute;
@@ -174,8 +220,14 @@ html, body, #root {
   text-align: center;
   opacity: 0;
   transform: translateY(100%);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
 }
+
+.overlay.active {
+  opacity: 1; /* Make overlay visible */
+  transform: translateY(0); /* Move overlay up */
+}
+
 
 .image-container:hover .overlay {
   opacity: 1;
@@ -239,12 +291,12 @@ html, body, #root {
   .hamburger-menu:hover {
     transform
 
-
+    
   .image-container {
     max-width: 50%; /* Take full width */
     height: auto;
   }
-}
+
 
 /* 626x897 */
 @media (min-width: 626px) and (max-width: 897px) {
