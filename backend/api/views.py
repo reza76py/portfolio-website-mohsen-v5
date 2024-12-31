@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import AudioFile, Contact
+from .models import AudioFile, Contact, Links
 from rest_framework import status
-from .serializers import ContactSerializer
+from .serializers import ContactSerializer, LinksSerializer
 
 
 class MessageView(APIView):
@@ -25,6 +25,19 @@ class AudioListView(APIView):
         ]
         return Response(data)
     
+class LinksView(APIView):
+    def get(self, request):
+        links = Links.objects.all()
+        serializer = LinksSerializer(links, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = LinksSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class ContactView(APIView):
     def get(self, request):

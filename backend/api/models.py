@@ -39,6 +39,15 @@ class AudioFile(models.Model):
         # Save the model again to store the resized image
         super().save(*args, **kwargs)
 
+class Links(models.Model):
+    title = models.CharField(max_length=255)
+    url = models.URLField()
+    description = models.TextField(blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
 
 class Contact(models.Model):
     name = models.CharField(max_length=255)
