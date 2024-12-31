@@ -9,11 +9,11 @@ const Home = () => {
   const audioRefs = useRef([]);
 
   useEffect(() => {
-    axios.get("http://172.16.11.199:8000/api/message/").then((response) => {
+    axios.get("http://127.0.0.1:8000/api/message/").then((response) => {
       setMessage(response.data.message);
     });
 
-    axios.get("http://172.16.11.199:8000/api/audio/").then((response) => {
+    axios.get("http://127.0.0.1:8000/api/audio/").then((response) => {
       setAudioFiles(response.data);
       audioRefs.current = response.data.map(() => null); // Initialize refs
     });
