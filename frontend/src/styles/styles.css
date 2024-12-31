@@ -272,6 +272,66 @@ html, body, #root {
 /* ######################################################################## */
 
 
+/* Container for the list of links */
+.links-container {
+  list-style-type: none; /* Removes default list styling */
+  padding: 0; /* Removes padding */
+  margin: 0; /* Removes margin */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-align the boxes */
+  gap: 15px; /* Space between the boxes */
+  background-color: rgb(72, 72, 75);
+  border-radius: 5px;
+  width: 50%;
+  position: relative;
+  left: 25%;
+}
+
+/* Individual link box styling */
+.link-box {
+  background-color: #f9f9f9; /* Light background */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 15px 20px; /* Spacing inside the box */
+  max-width: 400px; /* Limit the width of the box */
+  width: 100%; /* Full width for responsiveness */
+  text-align: center; /* Center the link text */
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth effects */
+  
+}
+
+/* Link text styling */
+.link-box a {
+  text-decoration: none; /* Removes underline */
+  font-size: 1.2rem; /* Makes the text slightly larger */
+  font-weight: bold; /* Bold text */
+  color: #a88c70; /* Blue color */
+}
+
+/* Hover effects for the box and link */
+.link-box:hover {
+  transform: translateY(-5px); /* Lifts the box slightly */
+  background-color: #eef; /* Changes background color on hover */
+}
+
+.link-box a:hover {
+  color: #0056b3; /* Darker blue for the link */
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ######################################################################## */
+
 
 .contact-container {
   max-width: 600px;

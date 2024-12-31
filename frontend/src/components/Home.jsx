@@ -183,7 +183,7 @@ const Home = () => {
       </ul>
 
       {/* Display Links */}
-      <ul>
+      <ul className="links-container">
         {links.map((link, index) => (
           <li key={index}>
             <a href={link.url}>{link.title}</a>
