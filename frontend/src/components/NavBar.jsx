@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 
+
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const handleAdminClick = () => {
+    // Temporarily redirect to the Django admin page
+    window.location.href = 'http://127.0.0.1:8000/admin/';
   };
 
   return (
@@ -38,6 +45,10 @@ const NavBar = () => {
           <a href="/contact">Contact</a>
         </li>
       </ul>
+      <button
+      className='login-btn'
+      onClick={handleAdminClick}
+      >LogIn</button>
     </div>
   );
 };
