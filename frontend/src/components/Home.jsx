@@ -4,6 +4,8 @@ import axios from "axios";
 const Home = () => {
   const [message, setMessage] = useState("");
   const [audioFiles, setAudioFiles] = useState([]);
+  const [categories, setCategories] = useState([]); // State for categories
+  const [selectedCategory, setSelectedCategory] = useState("All"); // State for selected category
   const [playingIndex, setPlayingIndex] = useState(null); // New state for playing index
   const [links, setLinks] = useState([]);
 
@@ -20,16 +22,18 @@ const Home = () => {
         console.error("Error fetching message:", error);
       });
 
-    // Fetch audio files
+    // Fetch categories
     axios
-      .get("http://127.0.0.1:8000/api/audio/")
+      .get("http://127.0.0.1:8000/api/categories/")
       .then((response) => {
-        setAudioFiles(response.data);
-        audioRefs.current = response.data.map(() => null); // Initialize refs
+        setCategories([{ name: "All" }, ...response.data]); // Include "All" as a default option
       })
       .catch((error) => {
-        console.error("Error fetching audio files:", error);
+        console.error("Error fetching categories:", error);
       });
+
+    // Fetch audio files
+    fetchAudioFiles();
 
     // Fetch links
     axios
@@ -41,6 +45,23 @@ const Home = () => {
         console.error("Error fetching links:", error);
       });
   }, []);
+
+  const fetchAudioFiles = (category = null) => {
+    let url = "http://127.0.0.1:8000/api/audio/";
+    if (category && category !== "All") {
+      url += `?category=${category}`;
+    }
+
+    axios
+      .get(url)
+      .then((response) => {
+        setAudioFiles(response.data);
+        audioRefs.current = response.data.map(() => null); // Initialize refs
+      })
+      .catch((error) => {
+        console.error("Error fetching audio files:", error);
+      });
+  };
 
   const handleAudioPlayPause = (index) => {
     // Pause any currently playing audio
@@ -65,14 +86,37 @@ const Home = () => {
     }
   };
 
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    fetchAudioFiles(category);
+  };
+
   return (
     <div>
       <p className="home-message">{message}</p>
+
+      {/* Category Filter */}
+      <div className="category-filter">
+        <select
+          value={selectedCategory}
+          onChange={(e) => handleCategoryChange(e.target.value)}
+        >
+          {categories.map((category, index) => (
+            <option key={index} value={category.name}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Audio Files */}
       <ul className="image-list">
         {audioFiles.map((audio, index) => (
           <li key={index}>
             <div
-              className={`image-container ${playingIndex === index ? "playing" : ""}`}
+              className={`image-container ${
+                playingIndex === index ? "playing" : ""
+              }`}
               onClick={() => handleAudioPlayPause(index)}
             >
               <img src={audio.image_url} alt={audio.title} />

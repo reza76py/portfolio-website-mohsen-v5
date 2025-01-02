@@ -1,15 +1,26 @@
 from django.contrib import admin
-from .models import AudioFile, Contact, Links
+from .models import AudioFile, Contact, Links, Category  # Import the models
 
+# Admin for Category
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'created_at']  # Display name and creation date
+    search_fields = ['name']  # Required for autocomplete functionality in AudioFileAdmin
+
+# Admin for AudioFile
+@admin.register(AudioFile)
 class AudioFileAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'uploaded_at', 'file', 'image')  # Display image field in admin list
+    list_display = ['title', 'category', 'uploaded_at', 'file', 'image']  # Display category and other fields
+    search_fields = ['title', 'category__name']  # Allow searching by title and category name
+    list_filter = ['category']  # Add filtering by category
+    autocomplete_fields = ['category']  # Enable searchable dropdown for categories
 
+# Admin for Contact
+@admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'subject', 'submitted_at')  # Display subject field in admin list
+    list_display = ('name', 'email', 'subject', 'submitted_at')  # Display subject and submission time
 
+# Admin for Links
+@admin.register(Links)
 class LinksAdmin(admin.ModelAdmin):
-    list_display = ('title', 'url', 'description', 'uploaded_at')  # Display description field in admin list       
-
-admin.site.register(AudioFile, AudioFileAdmin)  # Register both models with custom admin classes
-admin.site.register(Contact, ContactAdmin)
-admin.site.register(Links, LinksAdmin)
+    list_display = ('title', 'url', 'description', 'uploaded_at')  # Display description and upload time

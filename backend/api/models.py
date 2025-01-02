@@ -3,15 +3,29 @@ from PIL import Image
 from io import BytesIO
 from django.core.files.base import ContentFile
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.name
+
 class AudioFile(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     file = models.FileField(upload_to='audio/')
     image = models.ImageField(upload_to='images/', null=True, blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
+    category = models.ForeignKey(
+        'Category', 
+        on_delete=models.CASCADE, 
+        related_name='audio_files', 
+        null=True,  # Allow null values for existing rows
+        blank=True  # Make the field optional in forms
+    )
 
     def __str__(self):
-        return self.title
+        return f"{self.title} ({self.category.name if self.category else 'No Category'})"
     
 
     def save(self, *args, **kwargs):
