@@ -20,7 +20,7 @@ def category_list(request):
 # View for the message endpoint
 class MessageView(APIView):
     def get(self, request):
-        return Response({"message": "Hello, world!"})
+        return Response({"message": "Select the Category of music you want to listen to."})
 
 # View to list all audio files with audio_url and image_url
 class AudioListView(APIView):
