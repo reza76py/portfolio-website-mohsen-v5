@@ -291,7 +291,6 @@ html, body, #root {
   margin: 20px auto;
   max-width: 900px; /* Limits the width for larger screens */
   color: black;
-  font-family: 'Allura', cursive;
 }
 
 /* Title styling */
