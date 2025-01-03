@@ -14,8 +14,6 @@ const Home = () => {
   useEffect(() => {
     // Fetch message
     axios
-      // .get("http://127.0.0.1:8000/api/message/")
-
       .get("http://172.16.11.199:8000/api/message/")
       .then((response) => {
         setMessage(response.data.message);
@@ -38,14 +36,7 @@ const Home = () => {
     fetchAudioFiles();
 
     // Fetch links
-    axios
-      .get("http://172.16.11.199:8000/api/links/")
-      .then((response) => {
-        setLinks(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching links:", error);
-      });
+    fetchLinks();
   }, []);
 
   const fetchAudioFiles = (category = null) => {
@@ -62,6 +53,22 @@ const Home = () => {
       })
       .catch((error) => {
         console.error("Error fetching audio files:", error);
+      });
+  };
+
+  const fetchLinks = (category = null) => {
+    let url = "http://172.16.11.199:8000/api/links/";
+    if (category && category !== "All") {
+      url += `?category=${category}`;
+    }
+
+    axios
+      .get(url)
+      .then((response) => {
+        setLinks(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching links:", error);
       });
   };
 
@@ -91,6 +98,7 @@ const Home = () => {
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
     fetchAudioFiles(category);
+    fetchLinks(category); // Fetch links for the selected category
   };
 
   return (
@@ -122,7 +130,11 @@ const Home = () => {
               onClick={() => handleAudioPlayPause(index)}
             >
               <img src={audio.image_url} alt={audio.title} />
-              <div className={`overlay ${playingIndex === index ? "active" : ""}`}>
+              <div
+                className={`overlay ${
+                  playingIndex === index ? "active" : ""
+                }`}
+              >
                 <h3>{audio.title}</h3>
                 <div className="description-container">
                   <p>{audio.description}</p>

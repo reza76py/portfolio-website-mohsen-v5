@@ -20,7 +20,10 @@ class AudioFileAdmin(admin.ModelAdmin):
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'subject', 'submitted_at')  # Display subject and submission time
 
-# Admin for Links
+# admin.py
 @admin.register(Links)
 class LinksAdmin(admin.ModelAdmin):
-    list_display = ('title', 'url', 'description', 'uploaded_at')  # Display description and upload time
+    list_display = ('title', 'url', 'description', 'uploaded_at', 'category')
+    search_fields = ('title', 'url', 'category__name')
+    list_filter = ('category',)  # Filter by category
+    autocomplete_fields = ['category']  # Enable searchable dropdown for categories

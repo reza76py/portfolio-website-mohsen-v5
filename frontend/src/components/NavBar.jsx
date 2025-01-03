@@ -10,8 +10,7 @@ const NavBar = () => {
   };
 
   const handleAdminClick = () => {
-    // Temporarily redirect to the Django admin page
-    window.location.href = 'http://172.16.11.199:8000/admin/';
+    window.open('http://172.16.11.199:8000/admin/', '_blank');
   };
 
   return (

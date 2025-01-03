@@ -52,7 +52,16 @@ class AudioListView(APIView):
 # View to list and create links
 class LinksView(APIView):
     def get(self, request):
-        links = Links.objects.all()
+        # Get the category from the query parameters
+        category_name = request.GET.get('category', None)
+        
+        if category_name:
+            # Filter links by the specified category
+            links = Links.objects.filter(category__name=category_name)
+        else:
+            # Return all links if no category is specified
+            links = Links.objects.all()
+        
         serializer = LinksSerializer(links, many=True)
         return Response(serializer.data)
 

@@ -53,14 +53,23 @@ class AudioFile(models.Model):
         # Save the model again to store the resized image
         super().save(*args, **kwargs)
 
+# models.py
 class Links(models.Model):
     title = models.CharField(max_length=255)
     url = models.URLField()
     description = models.TextField(blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name='links',
+        null=True,  # Allow null for existing entries
+        blank=True  # Make it optional in forms
+    )
 
     def __str__(self):
         return self.title
+
 
 
 class Contact(models.Model):
