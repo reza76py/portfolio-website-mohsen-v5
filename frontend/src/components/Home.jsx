@@ -14,7 +14,9 @@ const Home = () => {
   useEffect(() => {
     // Fetch message
     axios
-      .get("http://127.0.0.1:8000/api/message/")
+      // .get("http://127.0.0.1:8000/api/message/")
+
+      .get("http://172.16.11.199:8000/api/message/")
       .then((response) => {
         setMessage(response.data.message);
       })
@@ -24,7 +26,7 @@ const Home = () => {
 
     // Fetch categories
     axios
-      .get("http://127.0.0.1:8000/api/categories/")
+      .get("http://172.16.11.199:8000/api/categories/")
       .then((response) => {
         setCategories([{ name: "All" }, ...response.data]); // Include "All" as a default option
       })
@@ -37,7 +39,7 @@ const Home = () => {
 
     // Fetch links
     axios
-      .get("http://127.0.0.1:8000/api/links/")
+      .get("http://172.16.11.199:8000/api/links/")
       .then((response) => {
         setLinks(response.data);
       })
@@ -47,7 +49,7 @@ const Home = () => {
   }, []);
 
   const fetchAudioFiles = (category = null) => {
-    let url = "http://127.0.0.1:8000/api/audio/";
+    let url = "http://172.16.11.199:8000/api/audio/";
     if (category && category !== "All") {
       url += `?category=${category}`;
     }
