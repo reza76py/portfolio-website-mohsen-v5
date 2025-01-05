@@ -10,7 +10,7 @@ const NavBar = () => {
   };
 
   const handleAdminClick = () => {
-    window.open('http://172.16.11.199:8000/admin/', '_blank');
+    window.open('http://127.0.0.1:8000/admin/', '_blank');
   };
 
   return (
